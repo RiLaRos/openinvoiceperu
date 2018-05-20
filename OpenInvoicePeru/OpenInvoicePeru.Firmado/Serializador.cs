@@ -105,9 +105,15 @@ namespace OpenInvoicePeru.Firmado
                                     xmlDoc.SelectSingleNode(EspacioNombres.nodoResponseCode,
                                         xmlnsManager)?.InnerText;
 
+
                                 response.MensajeRespuesta =
                                     xmlDoc.SelectSingleNode(EspacioNombres.nodoDescription,
                                         xmlnsManager)?.InnerText;
+
+                                response.NroTicketCdr =
+                                    xmlDoc.SelectSingleNode(EspacioNombres.nodoId,
+                                        xmlnsManager)?.InnerText;
+
                                 response.TramaZipCdr = constanciaRecepcion;
                                 response.NombreArchivo = entry.FileName;
                                 response.Exito = true;
