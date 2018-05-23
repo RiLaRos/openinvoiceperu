@@ -79,53 +79,62 @@ namespace OpenInvoicePeru.Firmado
             var returnByte = Convert.FromBase64String(constanciaRecepcion);
             using (var memRespuesta = new MemoryStream(returnByte))
             {
-                using (var zipFile = ZipFile.Read(memRespuesta))
+                if (memRespuesta != null && memRespuesta.Length > 0)
                 {
-                    foreach (var entry in zipFile.Entries)
+                    using (var zipFile = ZipFile.Read(memRespuesta))
                     {
-                        if (!entry.FileName.EndsWith(".xml")) continue;
-                        using (var ms = new MemoryStream())
+                        foreach (var entry in zipFile.Entries)
                         {
-                            entry.Extract(ms);
-                            ms.Position = 0;
-                            var responseReader = new StreamReader(ms);
-                            var responseString = await responseReader.ReadToEndAsync();
-                            try
+                            if (!entry.FileName.EndsWith(".xml")) continue;
+                            using (var ms = new MemoryStream())
                             {
-                                var xmlDoc = new XmlDocument();
-                                xmlDoc.LoadXml(responseString);
+                                entry.Extract(ms);
+                                ms.Position = 0;
+                                var responseReader = new StreamReader(ms);
+                                var responseString = await responseReader.ReadToEndAsync();
+                                try
+                                {
+                                    var xmlDoc = new XmlDocument();
+                                    xmlDoc.LoadXml(responseString);
 
-                                var xmlnsManager = new XmlNamespaceManager(xmlDoc.NameTable);
+                                    var xmlnsManager = new XmlNamespaceManager(xmlDoc.NameTable);
 
-                                xmlnsManager.AddNamespace("ar", EspacioNombres.ar);
-                                xmlnsManager.AddNamespace("cac", EspacioNombres.cac);
-                                xmlnsManager.AddNamespace("cbc", EspacioNombres.cbc);
+                                    xmlnsManager.AddNamespace("ar", EspacioNombres.ar);
+                                    xmlnsManager.AddNamespace("cac", EspacioNombres.cac);
+                                    xmlnsManager.AddNamespace("cbc", EspacioNombres.cbc);
 
-                                response.CodigoRespuesta =
-                                    xmlDoc.SelectSingleNode(EspacioNombres.nodoResponseCode,
-                                        xmlnsManager)?.InnerText;
+                                    response.CodigoRespuesta =
+                                        xmlDoc.SelectSingleNode(EspacioNombres.nodoResponseCode,
+                                            xmlnsManager)?.InnerText;
 
 
-                                response.MensajeRespuesta =
-                                    xmlDoc.SelectSingleNode(EspacioNombres.nodoDescription,
-                                        xmlnsManager)?.InnerText;
+                                    response.MensajeRespuesta =
+                                        xmlDoc.SelectSingleNode(EspacioNombres.nodoDescription,
+                                            xmlnsManager)?.InnerText;
 
-                                response.NroTicketCdr =
-                                    xmlDoc.SelectSingleNode(EspacioNombres.nodoId,
-                                        xmlnsManager)?.InnerText;
+                                    response.NroTicketCdr =
+                                        xmlDoc.SelectSingleNode(EspacioNombres.nodoId,
+                                            xmlnsManager)?.InnerText;
 
-                                response.TramaZipCdr = constanciaRecepcion;
-                                response.NombreArchivo = entry.FileName;
-                                response.Exito = true;
-                            }
-                            catch (Exception ex)
-                            {
-                                response.MensajeError = ex.Message;
-                                response.Pila = ex.StackTrace;
-                                response.Exito = false;
+                                    response.TramaZipCdr = constanciaRecepcion;
+                                    response.NombreArchivo = entry.FileName;
+                                    response.Exito = true;
+                                }
+                                catch (Exception ex)
+                                {
+                                    response.MensajeError = ex.Message;
+                                    response.Pila = ex.StackTrace;
+                                    response.Exito = false;
+                                }
                             }
                         }
                     }
+                }
+                else
+                {
+                    response.MensajeError = "Respuesta SUNAT Vacio";
+                    response.Pila = "-1";
+                    response.Exito = false;
                 }
             }
             return response;
