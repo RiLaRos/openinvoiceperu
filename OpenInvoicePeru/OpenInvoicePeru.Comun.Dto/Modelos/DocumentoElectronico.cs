@@ -51,7 +51,7 @@ namespace OpenInvoicePeru.Comun.Dto.Modelos
 
         public decimal TotalOtrosTributos { get; set; }
 
-        [JsonProperty(Required = Required.Always)]
+        [JsonIgnore]
         public string MontoEnLetras { get; set; }
 
         public string PlacaVehiculo { get; set; }
@@ -82,11 +82,13 @@ namespace OpenInvoicePeru.Comun.Dto.Modelos
         [JsonProperty(Required = Required.AllowNull)]
         public List<Discrepancia> Discrepancias { get; set; }
 
-        [JsonProperty(Required = Required.Always)]
+        [JsonIgnore]
         public decimal CalculoIgv { get; set; }
 
+        [JsonIgnore]
         public decimal CalculoIsc { get; set; }
 
+        [JsonIgnore]
         public decimal CalculoDetraccion { get; set; }
 
         public DocumentoElectronico()
@@ -110,6 +112,7 @@ namespace OpenInvoicePeru.Comun.Dto.Modelos
             TipoDocumento = "01"; // Factura.
             TipoOperacion = "01"; // Venta Interna.
             Moneda = "PEN"; // Soles.
+            MontoEnLetras = string.Empty;
         }
     }
 }
