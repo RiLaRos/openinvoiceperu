@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>OpenInvoicePeru.DataTransfersObjects</id>
-    <version>1.5.1</version>
+    <version>1.5.2</version>
     <title>OpenInvoicePeru DTO</title>
     <authors>Erick Orlando</authors>
     <owners>Erick Orlando</owners>
@@ -17,8 +17,8 @@
     <tags>openinvoiceperu facturacion electronica sunat electronic billing ubl</tags>
     <dependencies>
       <group targetFramework=".NETFramework4.0">
-        <dependency id="RestSharp" version="106.2.2" />
-        <dependency id="Newtonsoft.Json" version="11.0.2" />
+        <dependency id="Newtonsoft.Json" version="10.0.3" />
+        <dependency id="RestSharp" version="105.2.3" />
       </group>
     </dependencies>
   </metadata>
