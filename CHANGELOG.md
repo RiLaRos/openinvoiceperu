@@ -1,6 +1,6 @@
 # Control de Cambios
 
-## v1.5
+## v1.5.2
 
 ### Novedades
 
@@ -13,6 +13,4 @@
 
 ### Bug Resueltos
 
-- Se corrige problema que provocaba que los nombres de los archivos de XML Firmados y CDR se guarden de manera incorrecta en el WinApp.
-- Correccion de Datos de Receptor en Percepciones y Retenciones.
-- Issue #95 Error al firmar documentos XML codificados con UTF-8.
+- Paquete Nuget Actualizado con los campos nuevos de aportes.
