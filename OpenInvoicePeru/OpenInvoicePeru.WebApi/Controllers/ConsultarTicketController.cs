@@ -18,6 +18,7 @@ namespace OpenInvoicePeru.WebApi.Controllers
             _serializador = serializador;
         }
 
+        [HttpPost]
         public async Task<EnviarDocumentoResponse> Post([FromBody] ConsultaTicketRequest request)
         {
             var response = new EnviarDocumentoResponse();

@@ -21,6 +21,7 @@ namespace OpenInvoicePeru.WebApi.Controllers
                 .Resolve<IDocumentoXml>(GetType().Name);
         }
 
+        [HttpPost]
         public async Task<DocumentoResponse> Post([FromBody]ComunicacionBaja baja)
         {
             var response = new DocumentoResponse();

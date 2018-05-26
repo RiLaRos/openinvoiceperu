@@ -79,7 +79,12 @@ namespace OpenInvoicePeru.Firmado
             var returnByte = Convert.FromBase64String(constanciaRecepcion);
             using (var memRespuesta = new MemoryStream(returnByte))
             {
-                if (memRespuesta != null && memRespuesta.Length > 0)
+                if (memRespuesta.Length <= 0)
+                {
+                    response.MensajeError = "Respuesta SUNAT Vacio";
+                    response.Exito = false;
+                }
+                else
                 {
                     using (var zipFile = ZipFile.Read(memRespuesta))
                     {
@@ -107,7 +112,6 @@ namespace OpenInvoicePeru.Firmado
                                         xmlDoc.SelectSingleNode(EspacioNombres.nodoResponseCode,
                                             xmlnsManager)?.InnerText;
 
-
                                     response.MensajeRespuesta =
                                         xmlDoc.SelectSingleNode(EspacioNombres.nodoDescription,
                                             xmlnsManager)?.InnerText;
@@ -129,12 +133,6 @@ namespace OpenInvoicePeru.Firmado
                             }
                         }
                     }
-                }
-                else
-                {
-                    response.MensajeError = "Respuesta SUNAT Vacio";
-                    response.Pila = "-1";
-                    response.Exito = false;
                 }
             }
             return response;

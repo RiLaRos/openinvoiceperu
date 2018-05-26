@@ -17,6 +17,7 @@ namespace OpenInvoicePeru.WebApi.Controllers
             _servicioSunatDocumentos = servicioSunatDocumentos;
         }
 
+        [HttpPost]
         public async Task<EnviarDocumentoResponse> Post([FromBody]EnviarDocumentoRequest request)
         {
             var response = new EnviarDocumentoResponse();

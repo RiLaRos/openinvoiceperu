@@ -15,6 +15,7 @@ namespace OpenInvoicePeru.WebApi.Controllers
             _certificador = certificador;
         }
 
+        [HttpPost]
         public async Task<FirmadoResponse> Post([FromBody]FirmadoRequest request)
         {
             var response = new FirmadoResponse();

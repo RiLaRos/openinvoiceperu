@@ -19,8 +19,6 @@ namespace OpenInvoicePeru.Xml
             {
                 Id = documento.IdDocumento,
                 IssueDate = Convert.ToDateTime(documento.FechaEmision),
-                CustomizationId = "1.0",
-                UblVersionId = "2.0",
                 DespatchAdviceTypeCode = documento.TipoDocumento,
                 Note = documento.Glosa,
                 Signature = new SignatureCac
@@ -114,12 +112,13 @@ namespace OpenInvoicePeru.Xml
 
             despatchAdvice.Shipment = new Shipment
             {
+                Id = documento.ShipmentId,
                 HandlingCode = documento.CodigoMotivoTraslado,
                 Information = documento.DescripcionMotivo,
                 SplitConsignmentIndicator = documento.Transbordo,
                 GrossWeightMeasure = new InvoicedQuantity
                 {
-                    UnitCode = "KG",
+                    UnitCode = "KGM",
                     Value = documento.PesoBrutoTotal
                 },
                 TotalTransportHandlingUnitQuantity = documento.NroPallets,
