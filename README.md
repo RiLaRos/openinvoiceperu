@@ -1,3 +1,8 @@
+[![GitHub issues](https://img.shields.io/github/issues/frameworkperu/openinvoiceperu.svg?style=plastic)](https://github.com/frameworkperu/openinvoiceperu/issues) [![GitHub forks](https://img.shields.io/github/forks/frameworkperu/openinvoiceperu.svg?style=plastic)](https://github.com/frameworkperu/openinvoiceperu/network) [![GitHub stars](https://img.shields.io/github/stars/frameworkperu/openinvoiceperu.svg?style=plastic)](https://github.com/frameworkperu/openinvoiceperu/stargazers) 
+[![NuGet](https://img.shields.io/badge/downloads-2.8K-blue.svg?style=plastic)](https://github.com/FrameworkPeru/openinvoiceperu/releases)
+[![NuGet](https://img.shields.io/badge/nuget-v1.5.2-green.svg?style=plastic)](https://www.nuget.org/packages/OpenInvoicePeru.DataTransfersObjects/)
+
+
 ![Open Invoice Perú](http://frameworkperu.com/OpenInvoicePeruLogo.png "Open Invoice Perú")
 # OpenInvoicePeru v1.5.2 #
 OpenInvoicePeru es un proyecto Open Source construido con C#, haciendo sencilla la Facturación Electrónica de SUNAT, este proyecto está orientado al desarrollador.
