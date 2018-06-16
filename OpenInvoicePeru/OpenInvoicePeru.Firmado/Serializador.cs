@@ -3,9 +3,9 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
-using Ionic.Zip;
 using OpenInvoicePeru.Comun.Constantes;
 using OpenInvoicePeru.Comun.Dto.Intercambio;
+using System.IO.Compression;
 
 namespace OpenInvoicePeru.Firmado
 {
@@ -48,19 +48,24 @@ namespace OpenInvoicePeru.Firmado
         {
             var task = Task.Factory.StartNew(() =>
             {
-                var memOrigen = new MemoryStream(Convert.FromBase64String(tramaXml));
-                var memDestino = new MemoryStream();
                 string resultado;
 
-                using (var fileZip = new ZipFile($"{nombreArchivo}.zip"))
+                using (var memDestino = new MemoryStream())
                 {
-                    fileZip.AddEntry($"{nombreArchivo}.xml", memOrigen);
-                    fileZip.Save(memDestino);
+                    using (var ziparchive = new ZipArchive(memDestino, ZipArchiveMode.Create))
+                    {
+
+                        ZipArchiveEntry zipItem = ziparchive.CreateEntry($"{nombreArchivo}.xml");
+
+                        using (Stream ZipFile = zipItem.Open())
+                        {
+                            byte[] data = Convert.FromBase64String(tramaXml);
+                            ZipFile.Write(data, 0, data.Length);
+                        }
+                    }
+
                     resultado = Convert.ToBase64String(memDestino.ToArray());
                 }
-                // Liberamos memoria RAM.
-                memOrigen.Close();
-                memDestino.Close();
 
                 return resultado;
             });
@@ -86,15 +91,13 @@ namespace OpenInvoicePeru.Firmado
                 }
                 else
                 {
-                    using (var zipFile = ZipFile.Read(memRespuesta))
+                    using (ZipArchive zipFile = new ZipArchive(memRespuesta, ZipArchiveMode.Read))
                     {
-                        foreach (var entry in zipFile.Entries)
+                        foreach (ZipArchiveEntry entry in zipFile.Entries)
                         {
-                            if (!entry.FileName.EndsWith(".xml")) continue;
-                            using (var ms = new MemoryStream())
-                            {
-                                entry.Extract(ms);
-                                ms.Position = 0;
+                            if (!entry.Name.EndsWith(".xml")) continue;
+                            using (Stream ms = entry.Open())
+                            {  
                                 var responseReader = new StreamReader(ms);
                                 var responseString = await responseReader.ReadToEndAsync();
                                 try
@@ -121,7 +124,7 @@ namespace OpenInvoicePeru.Firmado
                                             xmlnsManager)?.InnerText;
 
                                     response.TramaZipCdr = constanciaRecepcion;
-                                    response.NombreArchivo = entry.FileName;
+                                    response.NombreArchivo = entry.Name;
                                     response.Exito = true;
                                 }
                                 catch (Exception ex)
