@@ -10,6 +10,7 @@
 - XML para Boletas y Facturas más pequeños.
 - Proyectos innecesarios removidos.
 - Documentacion removida al proyecto [openinvoiceperudocs](https://github.com/FrameworkPeru/openinvoiceperudocs).
+- Etiqueta de Orden de Compra en Factura.
 
 ### Bug Resueltos
 

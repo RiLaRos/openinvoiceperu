@@ -83,6 +83,10 @@ Si tiene errores con SUNAT fíjese en el código devuelto:
 
 Si tiene mas dudas con SUNAT comuníquese con ellos al [+51 1 3150730](tel:+5113150730).
 
+## UBL 2.1 ##
+
+Este proyecto fue inicialmente concebido en Abril del 2016 para el formato del UBL 2.0, la actualización al UBL 2.1 por parte de Framework Peru no se realizará de forma [gratuita](http://www.frameworkperu.com/2018/06/15/openinvoiceperu-con-ubl-2-1/), sin embargo cualquier persona es libre de realizar el Pull Request con sus respectivas mejoras al código y hacer que toda la comunidad se beneficie con las actualizaciones, todo cambio es bienvenido. 
+
 ## Asesoría y Soporte ##
 
 
