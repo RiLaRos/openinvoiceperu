@@ -51,7 +51,7 @@ namespace OpenInvoicePeru.Servicio.Soap
 
                 _proxyConsultas.Close();
 
-                var estado = (resultado.statusCode != "98");
+                var estado = resultado.statusCode != "98";
 
                 response.ConstanciaDeRecepcion = estado
                     ? Convert.ToBase64String(resultado.content) : "Aun en proceso";

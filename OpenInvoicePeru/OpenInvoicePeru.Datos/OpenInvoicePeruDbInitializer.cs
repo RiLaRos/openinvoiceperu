@@ -4,15 +4,17 @@ using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
 using OpenInvoicePeru.Entidades;
+using SQLite.CodeFirst;
 
 namespace OpenInvoicePeru.Datos
 {
-    public class OpenInvoicePeruDbInitializer : CreateDatabaseIfNotExists<OpenInvoicePeruDb>
+    public class OpenInvoicePeruDbInitializer : SqliteDropCreateDatabaseWhenModelChanges<OpenInvoicePeruDb>
     {
-        //public OpenInvoicePeruDbInitializer(DbModelBuilder modelBuilder)
-        //    : base(modelBuilder)
-        //{
-        //}
+        public OpenInvoicePeruDbInitializer(DbModelBuilder modelBuilder)
+            : base(modelBuilder)
+        {
+
+        }
 
         protected override void Seed(OpenInvoicePeruDb context)
         {

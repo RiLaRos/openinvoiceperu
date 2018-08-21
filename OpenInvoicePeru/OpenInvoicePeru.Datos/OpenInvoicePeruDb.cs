@@ -49,7 +49,7 @@ namespace OpenInvoicePeru.Datos
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Configurations.AddFromAssembly(Assembly.GetExecutingAssembly());
-            var initializer = new OpenInvoicePeruDbInitializer();
+            var initializer = new OpenInvoicePeruDbInitializer(modelBuilder);
             Database.SetInitializer(initializer);
         }
 
