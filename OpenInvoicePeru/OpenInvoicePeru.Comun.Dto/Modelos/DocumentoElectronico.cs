@@ -82,6 +82,9 @@ namespace OpenInvoicePeru.Comun.Dto.Modelos
         [JsonProperty(Required = Required.AllowNull)]
         public List<Discrepancia> Discrepancias { get; set; }
 
+        [JsonProperty(Required = Required.AllowNull)]
+        public string NroOrdenCompra { get; set; }
+
         [JsonIgnore]
         public decimal CalculoIgv { get; set; }
 

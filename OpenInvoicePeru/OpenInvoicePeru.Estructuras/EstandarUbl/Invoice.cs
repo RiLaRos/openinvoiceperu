@@ -42,6 +42,8 @@ namespace OpenInvoicePeru.Estructuras.EstandarUbl
 
         public BillingPayment PrepaidPayment { get; set; }
 
+        public string OrderReference { get; set; }
+
         public string UblVersionId { get; set; }
 
         public string CustomizationId { get; set; }
@@ -398,6 +400,15 @@ namespace OpenInvoicePeru.Estructuras.EstandarUbl
             writer.WriteElementString("cbc:IssueDate", IssueDate.ToString(Formatos.FormatoFecha));
             writer.WriteElementString("cbc:InvoiceTypeCode", InvoiceTypeCode);
             writer.WriteElementString("cbc:DocumentCurrencyCode", DocumentCurrencyCode);
+
+            if (!string.IsNullOrEmpty(OrderReference))
+            {
+                writer.WriteStartElement("cac:OrderReference");
+                {
+                    writer.WriteElementString("cbc:ID", OrderReference);
+                }
+                writer.WriteEndElement();
+            }
 
             #region DespatchDocumentReferences
 

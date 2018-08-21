@@ -55,12 +55,12 @@ namespace OpenInvoicePeru.Firmado
                     using (var ziparchive = new ZipArchive(memDestino, ZipArchiveMode.Create))
                     {
 
-                        ZipArchiveEntry zipItem = ziparchive.CreateEntry($"{nombreArchivo}.xml");
+                        var zipItem = ziparchive.CreateEntry($"{nombreArchivo}.xml");
 
-                        using (Stream ZipFile = zipItem.Open())
+                        using (var zipFile = zipItem.Open())
                         {
-                            byte[] data = Convert.FromBase64String(tramaXml);
-                            ZipFile.Write(data, 0, data.Length);
+                            var data = Convert.FromBase64String(tramaXml);
+                            zipFile.Write(data, 0, data.Length);
                         }
                     }
 

@@ -194,6 +194,11 @@ namespace OpenInvoicePeru.Xml
                     }
                 }
             };
+            if (!string.IsNullOrEmpty(documento.NroOrdenCompra))
+            {
+                invoice.OrderReference = documento.NroOrdenCompra;
+            }
+
             if (documento.TotalIsc > 0)
             {
                 invoice.TaxTotals.Add(new TaxTotal
